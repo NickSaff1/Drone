@@ -16,6 +16,7 @@ public class DroneController : RobotController
 
     public ParticleSystem dustParticles;
 
+    public float propellerSpeed;
     public float maxPropellerTorque = 1000f; // Maximum torque to apply to propellers
     public float torqueIncreaseRate = 500f;  // Rate at which torque increases to start the propellers
     public float torqueDecreaseRate = 200f;  // Rate at which torque decreases to slow down the propellers
@@ -165,6 +166,20 @@ public class DroneController : RobotController
         body.AddTorque(-body.angularVelocity * drag);
     }
 
+    void SpinPropellers()
+    {
+        if (isOn)
+        {
+            foreach (GameObject prop in spinnyProps)
+            {
+                // Spin the propeller at a constant speed
+                prop.transform.Rotate(Vector3.up * propellerSpeed * Time.deltaTime);
+            }
+        }
+    }
+
+
+    /*
     // Purely visual, doesn't work properly tho smh my head
     void SpinPropellers()
     {
@@ -186,6 +201,7 @@ public class DroneController : RobotController
             }
         }
     }
+    */
 
     public void TriggerFlash()
     {
