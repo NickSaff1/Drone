@@ -75,12 +75,14 @@ public class DroneController : RobotController
                 virtualCam.GetComponent<CinemachineVirtualCamera>().Priority = 10;
                 CameraFrame.SetActive(true);
                 OnAim?.Invoke(true); // Aim is active
+                turnTorqueMultiplier = 1;
             }
             else
             {
                 virtualCam.GetComponent<CinemachineVirtualCamera>().Priority = 0;
                 CameraFrame.SetActive(false);
                 OnAim?.Invoke(false); // Aim is not active
+                turnTorqueMultiplier = 10;
             }
 
             // Take pictures of Defects
