@@ -126,7 +126,7 @@ public class ScoringSystem : MonoBehaviour
             int maxPossibleScore = defects.Count * MaxScorePerDefect;
             float grade = (float)totalScore / maxPossibleScore;
 
-            gradeCard.transform.Find("Gradecard/Final Grade").GetComponent<TextMeshProUGUI>().text = "Final Score: " + CalculateLetterGrade(grade);
+            gradeCard.transform.Find("Gradecard/Final Grade").GetComponent<TextMeshProUGUI>().text = "Final Score: " + CalculateLetterGrade(grade * 100);
 
             Debug.Log($"Final Grade: {grade * 100}%");
         }
