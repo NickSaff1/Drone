@@ -22,6 +22,7 @@ public abstract class Defect : MonoBehaviour
     public int defectScore = 0; // Score from capture ; updated in RobotController
     public int distanceScore = 0; // Score based on photo distance from defect
     public int angleScore = 0; // Score based on photo angle from defect ( perpendicular = max points )
+    public int classificationScore = 100; // Score based on classification and condition // hard coded for now smh
 
     // Event to notify when a defect is scanned
     public static event Action<Defect> OnDefectScanned;

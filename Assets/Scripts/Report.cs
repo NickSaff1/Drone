@@ -93,7 +93,7 @@ public class Report : MonoBehaviour
 
             // Assign defect.classification to DefectName TextMeshPro component
             TextMeshProUGUI defectNameText = currentDefect.transform.Find("DefectName").GetComponent<TextMeshProUGUI>();
-            defectNameText.text = defect.classification;
+            //defectNameText.text = defect.classification;
 
             // Assign defect.defectCapture to DefectImage Image component
             Image defectImage = currentDefect.transform.Find("DefectImage").GetComponent<Image>();

@@ -11,7 +11,7 @@ public class ScoringSystem : MonoBehaviour
     [SerializeField] public int totalDefects = 0;
     private const int BaseScorePerDefect = 100;
     private const int MaxAdditionalScorePerDefect = 100;
-    private const int MaxScorePerDefect = BaseScorePerDefect + 200; // 100 base + 100 distance + 100 angle
+    private const int MaxScorePerDefect = BaseScorePerDefect + 300; // 100 base + 100 distance + 100 angle + 100 condition
 
     // Frontend UI
     public GameObject gradeCard;    // UI Canvas for score 
@@ -99,26 +99,28 @@ public class ScoringSystem : MonoBehaviour
         {
             foreach (Defect defect in defects)
             {
-                totalScore += defect.defectScore + defect.distanceScore + defect.angleScore;
-
                 // Update UI
                 GameObject currentGrade = Instantiate(gradePrefab, transform.position, Quaternion.identity, gradeCollection.transform);
                 currentGrade.transform.Find("Breakdown/Score Name/Name").GetComponent<TextMeshProUGUI>().text = defect.classification;
                 currentGrade.transform.Find("Breakdown/Picture Distance/Score").GetComponent<TextMeshProUGUI>().text = defect.distanceScore.ToString() + " / 100";
                 currentGrade.transform.Find("Breakdown/Picture Angle/Score").GetComponent<TextMeshProUGUI>().text = defect.angleScore.ToString() + " / 100";
+                currentGrade.transform.Find("Breakdown/Classification/Score").GetComponent<TextMeshProUGUI>().text =
+                    defect.classificationScore.ToString() + " / 100";
 
                 // Calculate letter grade
                 // Base score = 100
                 // Distance score max = 100
                 // Angle Score max = 100
                 // 300 points total
+                // Classification score max = 100 (binary atm, factor in measurement and condition later)
                 // Convert score out of 300 to letter grade
                 // score = defect.defectScore + defect.distanceScore + defect.angleScore
 
-                int currentScore = defect.defectScore + defect.distanceScore + defect.angleScore;
+                int currentScore = defect.defectScore + defect.distanceScore + defect.angleScore + defect.classificationScore;
+                totalScore += currentScore;
 
                 // Convert total score out of 300 into a percentage
-                float percentage = (float)currentScore / 300 * 100;
+                float percentage = (float)currentScore / 400 * 100;
 
                 currentGrade.transform.Find("Total Score Area/Score").GetComponent<TextMeshProUGUI>().text = CalculateLetterGrade(percentage);
             }

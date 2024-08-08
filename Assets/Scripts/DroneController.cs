@@ -74,6 +74,7 @@ public class DroneController : RobotController
             {
                 virtualCam.GetComponent<CinemachineVirtualCamera>().Priority = 10;
                 CameraFrame.SetActive(true);
+                UpdateReticleColor();
                 OnAim?.Invoke(true); // Aim is active
                 turnTorqueMultiplier = 1;
             }
